@@ -1,0 +1,17 @@
+h2. Fronteers 2009 through YQL
+
+All attendees:
+
+<pre>
+use "http://github.com/gudmundurh/fronteers2009/raw/master/fronteers2009.attendees.xml";
+select * from fronteers2009.attendees;
+</pre>
+
+Only Twitter usernames:
+
+<pre>
+use "http://github.com/gudmundurh/fronteers2009/raw/master/fronteers2009.attendees.xml";
+select attendee.twittername from fronteers2009.attendees where attendee.twittername != '';
+</pre>
+
+"Open the YQL console to try this out":http://developer.yahoo.com/yql/console
