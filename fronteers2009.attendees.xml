@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
+    <meta>
+        <description>The attendees of the Fronteers 2009 conference</description>
+        <sampleQuery>select * from fronteers20009.attendees</sampleQuery>
+        <sampleQuery>select attendee.twittername from fronteers20009.attendees where attendee.twittername != ''</sampleQuery>
+    </meta>
+    <bindings>
+        <select itemPath="" produces="XML">
+            <urls>
+                <url>http://hreidarsson.com/yql/fronteers2009/fronteers2009.attendees.js</url>
+            </urls>
+            <execute><![CDATA[
+                // Extracts all the text content of a node and strips
+                // Could this be done better using the text() method?
+                function textify(node) {
+                    var xml = node.toXMLString();
+                    return xml.replace(/<[^>]*>/g, '').replace(/^\s*/, '').replace(/\s*$/, '');
+                }
+
+                var query = 'select * from html where url="http://fronteers.nl/congres/2009/attendees" and xpath="//tr"';
+                var fronteersAttendees = y.query(query);
+
+                results = <attendees></attendees>;
+
+                for each (var attendeeRow in fronteersAttendees.results.tr) {
+                    if (!attendeeRow.td || attendeeRow.td.length() != 4)
+                        continue;
+
+                    var attendee = <attendee/>;    
+
+                    attendee.name = textify(attendeeRow.td[0]);
+                    attendee.company = textify(attendeeRow.td[1]);
+                    attendee.twittername = textify(attendeeRow.td[2]);
+                    attendee.country = textify(attendeeRow.td[3]);
+                    results.appendChild(attendee);
+                }
+
+                response.object = results;
+            ]]></execute>
+        </select>
+    </bindings>
+</table>
