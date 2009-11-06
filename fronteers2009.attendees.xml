@@ -6,7 +6,7 @@
         <sampleQuery>select attendee.twittername from fronteers20009.attendees where attendee.twittername != ''</sampleQuery>
     </meta>
     <bindings>
-        <select itemPath="attendee" produces="XML">
+        <select itemPath="" produces="XML">
             <urls>
                 <url>http://hreidarsson.com/yql/fronteers2009/fronteers2009.attendees.xml</url>
             </urls>
