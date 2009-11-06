@@ -6,9 +6,9 @@
         <sampleQuery>select attendee.twittername from fronteers20009.attendees where attendee.twittername != ''</sampleQuery>
     </meta>
     <bindings>
-        <select itemPath="" produces="XML">
+        <select itemPath="attendee" produces="XML">
             <urls>
-                <url>http://hreidarsson.com/yql/fronteers2009/fronteers2009.attendees.js</url>
+                <url>http://hreidarsson.com/yql/fronteers2009/fronteers2009.attendees.xml</url>
             </urls>
             <execute><![CDATA[
                 // Extracts all the text content of a node and strips
