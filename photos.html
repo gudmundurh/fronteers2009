@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Fronteers 2009 attendees</title>
+  <style>
+    img { float: left; }
+  </style>
+</head>
+<body>
+
+  <div id="photos"></div>
+
+  <script type="text/javascript">
+    function showPhotos(q) {
+      window.onload = function() {
+        var items = q.query.results.item;
+        for (var i = 0; i < items.length; i++) {
+          var photoUrl = items[i].item.resource;
+          var img = document.createElement('img');
+          img.src = photoUrl;
+          img.width = 48;
+          img.height = 48;
+          document.getElementById('photos').appendChild(img)
+        }
+      }  
+    }
+  </script>
+
+  <script type="text/javascript" src="http://query.yahooapis.com/v1/public/yql?q=use%20%22http%3A%2F%2Fgithub.com%2Fgudmundurh%2Ffronteers2009%2Fraw%2Fmaster%2Ffronteers2009.attendees.xml%22%3B%20select%20item.resource%20from%20twitter.user.profile%20where%20id%20in%20%28%20select%20attendee.twittername%20from%20fronteers2009.attendees%20where%20attendee.twittername%20!%3D%20%27%27%29%20and%20item.rel%3D%22rel%3APhoto%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=showPhotos"></script>
+
+  <p><a href="http://github.com/gudmundurh/fronteers2009">And this is on GitHub</a></p>
+
+</body>
+</html>
